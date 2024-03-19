@@ -1,0 +1,19 @@
+version: "3.8"
+
+services:
+  tof-recon: 
+    build: .
+    container_name: tof-recon
+    volumes: 
+      - /home/daria/scripts/tof-recon/NeSVoR/nesvor/:/code/nesvor/
+      - /home/daria/data/tof-project:/incoming:ro
+      - /home/daria/data/tof-project:/outgoing:rw
+    ipc: host
+    tty: true
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]

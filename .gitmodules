@@ -1,0 +1,3 @@
+[submodule "NeSVoR"]
+	path = NeSVoR
+	url = https://github.com/DariaHasin/NeSVoR.git

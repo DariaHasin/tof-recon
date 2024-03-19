@@ -1,0 +1,53 @@
+==============================================================================================================================================================================
+docker run --rm --gpus all --ipc=host \
+    -v /home/daria/data/tof-project:/incoming:ro -v /home/daria/data/tof-project:/outgoing:rw \
+    -v /home/daria/scripts/NeSVoR/nesvor/:./nesvor/
+    -v /home/daria/scripts/NeSVoR/setup.py/:./setup.py
+    junshenxu/nesvor:v0.5.0 \
+    nesvor:latest \
+nesvor reconstruct \
+    --input-stacks /incoming/scans_stripped/firstPatient/ax_stripped.nii.gz /incoming/scans_stripped/firstPatient/cor_stripped.nii.gz /incoming/scans_stripped/firstPatient/sag_stripped.nii.gz \
+    --output-volume /outgoing/nesvor-output/firstPatient/volume.nii.gz \
+    --output-resolution 0.8 \
+    --registration none \
+    --no-pixel-variance \
+    --no-slice-variance
+
+    --simulated-slices /outgoing/simulated_slices/firstPatientTry \
+    
+==============================================================================================================================================================================
+TCNN_CUDA_ARCHITECTURES = 89
+
+==============================================================================================================================================================================
+docker build \
+    --build-arg CUDA_ARCHITECTURES=86 \
+    --tag nesvor \
+    --file Dockerfile .
+
+    --build-arg CUDA_VERSION=11.8.0 \
+    --build-arg OS_VERSION=22.04 \
+    
+==============================================================================================================================================================================
+    
+    
+
+
+docker build -t tof-recon .
+
+
+
+
+docker run \
+--rm \
+-it \
+--gpus all \
+--ipc=host \
+--name tof-recon \
+-v /home/daria/scripts/tof-recon/NeSVoR/nesvor/:/code/nesvor/ \
+-v /home/daria/scripts/tof-recon/NeSVoR/setup.py/:/code/setup.py \
+-v /home/daria/data/tof-project:/incoming:ro -v /home/daria/data/tof-project:/outgoing:rw \
+tof-recon
+
+
+-v /home/daria/scripts/tof-recon/NeSVoR/nesvor/:/code/nesvor/ \
+-v /home/daria/scripts/tof-recon/NeSVoR/setup.py/:/code/setup.py \
