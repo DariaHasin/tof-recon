@@ -4,8 +4,10 @@ services:
   tof-recon: 
     build: .
     container_name: tof-recon
+    command: bash /code/init.sh
     volumes: 
       - /home/daria/scripts/tof-recon/NeSVoR/nesvor/:/code/nesvor/
+      - /home/daria/scripts/tof-recon/init.sh:/code/init.sh
       - /home/daria/data/tof-project:/incoming:ro
       - /home/daria/data/tof-project:/outgoing:rw
     ipc: host

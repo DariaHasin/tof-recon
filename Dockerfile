@@ -31,6 +31,8 @@ ARG TORCH_CUDA_ARCH_LIST="8.6 8.0 7.5 7.0 6.1+PTX"
 WORKDIR /code
 RUN pip install -e .
 
+RUN cp -R /code/nesvor/ /tmp/nesvor/
+
 # FIXME: TEMPORARY HACK
 # A better way to install weights: use package_data. Example:
 # https://github.com/FNNDSC/pl-covidnet-pdfgeneration/blob/038ef4e9bb8f2d6530b96622a12826d77ced0bd7/setup.py#L22-L24
