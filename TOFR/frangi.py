@@ -3,7 +3,7 @@ import numpy as np
 from skimage.filters import frangi
 
 # Load the NIfTI scan
-nifti_path = '/home/daria/shared/data/tof-project/nesvor-output/Daria/nesvor_recon_20240307_1831.nii.gz'
+nifti_path = '~/shared/data/tof-project/scans_stripped/Aviad/ax_stripped.nii.gz'
 img = nib.load(nifti_path)
 data = img.get_fdata()
 
@@ -30,7 +30,7 @@ for i in range(data.shape[2]):
 
 # Save the filtered image
 filtered_img = nib.Nifti1Image(filtered_data, img.affine, img.header)
-filtered_nifti_path = '/home/daria/shared/data/tof-project/nesvor-output/Daria/nesvor_recon_20240307_1831_frangi_35.nii.gz'
+filtered_nifti_path = '~/shared/data/tof-project/scans_stripped/Aviad/ax_stripped_frangi.nii.gz'
 nib.save(filtered_img, filtered_nifti_path)
 
 print(f"Filtered NIfTI file saved as {filtered_nifti_path}")
